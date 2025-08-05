@@ -4,7 +4,12 @@ import {
     codeFromToSchema,
     codeRangeSchema,
     summarySchema,
-    inventorySchema
+    inventorySchema,
+    momentumSchema,
+    intradayInventorySchema,
+    sankeySchema,
+    insiderSchema,
+    aboveFivePercentSchema
 } from "@/schema/stock";
 import { server } from "@/server";
 import { 
@@ -21,7 +26,12 @@ import {
     summaryBroker,
     shareholderKSEI,
     inventoryStock,
-    inventoryBroker
+    inventoryBroker,
+    momentum,
+    intradayInventory,
+    sankey,
+    insider,
+    aboveFivePercent
 } from "./handler";
   
 export const registerStockTools = (): void => {
@@ -126,5 +136,40 @@ export const registerStockTools = (): void => {
         description: "Visualisasi inventory atau transaksi data broker summary sesuai dengan kode broker (code) dan tanggal awal (from) dan akhir (to). Jenis data: Time Series. Update EOD setiap 18.00 WIB",
         parameters: inventorySchema,
         execute: async (args, context) => await inventoryBroker(args, context),
+    });
+
+    server.addTool({
+        name: "momentum",
+        description: "Grafik momentum saham sesuai dengan kode emiten (code) dan tanggal (date) dan range (range). Jenis data: Time Series. Update EOD setiap 18.00 WIB",
+        parameters: momentumSchema,
+        execute: async (args, context) => await momentum(args, context),
+    });
+
+    server.addTool({
+        name: "intradayInventory",
+        description: "Grafik inventory atau transaksi data broker summary sesuai dengan kode emiten (code) dan tanggal awal (from) dan akhir (to). Jenis data: Time Series. Update EOD setiap 18.00 WIB",
+        parameters: intradayInventorySchema,
+        execute: async (args, context) => await intradayInventory(args, context),
+    });
+
+    server.addTool({
+        name: "sankey",
+        description: "Grafik sankey atau transaksi data broker summary sesuai dengan kode emiten (code) dan tanggal awal (from) dan akhir (to). Jenis data: Time Series. Update EOD setiap 18.00 WIB",
+        parameters: sankeySchema,
+        execute: async (args, context) => await sankey(args, context),
+    });
+
+    server.addTool({
+        name: "insider",
+        description: "Data pemegang saham atau insider sesuai dengan kode emiten (code) dan tanggal awal (from) dan akhir (to). Jenis data: Cross Section. Update EOD setiap 18.00 WIB",
+        parameters: insiderSchema,
+        execute: async (args, context) => await insider(args, context),
+    });
+
+    server.addTool({
+        name: "aboveFivePercent",
+        description: "Data pemegang saham atau insider sesuai dengan kode emiten (code) dan tanggal awal (from) dan akhir (to). Jenis data: Cross Section. Update EOD setiap 18.00 WIB",
+        parameters: aboveFivePercentSchema,
+        execute: async (args, context) => await aboveFivePercent(args, context),
     });
 };

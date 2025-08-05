@@ -4,7 +4,12 @@ import {
   CodeFromToArgs,
   CodeRangeArgs,
   SummaryArgs,
-  InventoryArgs
+  InventoryArgs,
+  MomentumArgs,
+  IntradayInventoryArgs,
+  SankeyArgs,
+  InsiderArgs,
+  AboveFivePercentArgs
 } from "@/schema/stock";
 import { SessionData } from "@/server";
 import { HandlerReturnType } from "@/types/common";
@@ -163,6 +168,63 @@ export const inventoryBroker = async (
 
   return formatResponse(data);
 }
+
+export const momentum = async (
+  args: MomentumArgs,
+  context: Context<SessionData>
+): Promise<HandlerReturnType> => {
+  const apiKey = context.session?.apiKey as string;
+
+  const data = await customFetch(`analysis/momentum-chart/${args.code}?date=${args.date}&range=${args.range}&scope=${args.scope}`, apiKey);
+
+  return formatResponse(data);
+}
+
+export const intradayInventory = async (
+  args: IntradayInventoryArgs,
+  context: Context<SessionData>
+): Promise<HandlerReturnType> => {
+  const apiKey = context.session?.apiKey as string;
+  
+  const data = await customFetch(`analysis/intraday-inventory-chart/${args.code}?range=${args.range}&type=${args.type}&total=${args.total}&buyer=${args.buyer}&seller=${args.seller}&market=${args.market}&broker=${args.broker}`, apiKey);
+
+  return formatResponse(data);
+}
+
+export const sankey = async (
+  args: SankeyArgs,
+  context: Context<SessionData>
+): Promise<HandlerReturnType> => {
+  const apiKey = context.session?.apiKey as string;
+  
+  const data = await customFetch(`analysis/sankey-chart/${args.code}?type=${args.type}&buyer=${args.buyer}&seller=${args.seller}&market=${args.market}&broker=${args.broker}`, apiKey);
+
+  return formatResponse(data);
+}
+
+export const insider = async (
+  args: InsiderArgs,
+  context: Context<SessionData>
+): Promise<HandlerReturnType> => {
+  const apiKey = context.session?.apiKey as string;
+  
+  const data = await customFetch(`analysis/shareholder-insider?code${args.code}&from=${args.from}&to=${args.to}&page=${args.page}&limit=${args.limit}`, apiKey);
+
+  return formatResponse(data);
+}
+
+export const aboveFivePercent = async (
+  args: AboveFivePercentArgs,
+  context: Context<SessionData>
+): Promise<HandlerReturnType> => {
+  const apiKey = context.session?.apiKey as string;
+  
+  const data = await customFetch(`analysis/shareholder-above?code=${args.code}&from=${args.from}&to=${args.to}&page=${args.page}&limit=${args.limit}`, apiKey);
+
+  return formatResponse(data);
+}
+
+
 
 
 
