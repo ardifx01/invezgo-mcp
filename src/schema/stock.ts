@@ -55,7 +55,6 @@ export const sankeySchema = codeOnlySchema.extend({
 
 export const pageSchema = z.object({
     from: z.string().default("2025-07-01").describe("Tanggal periode awal dengan format YYYY-MM-DD (Cth : 2024-12-30)"),
-    to: z.string().default("2025-08-05").describe("Tanggal periode akhir dengan format YYYY-MM-DD (Cth : 2024-12-30)"),
     page: z.number().default(1).describe("Halaman yang akan di tampilkan"),
     limit: z.number().default(10).describe("Jumlah data yang akan di tampilkan per halaman")
 });
@@ -63,11 +62,10 @@ export const pageSchema = z.object({
 export const insiderSchema = pageSchema.extend({
     code: z.string().describe("Kode emiten berdasarkan data dari /list/stock (Cth : BBCA)").optional(),
     name: z.string().describe("Nama pemegang saham").optional(),
-    broker: z.string().describe("Kode broker berdasarkan data dari /list/broker (Cth : BCA)").optional(),
 });
 
 export const aboveFivePercentSchema = insiderSchema.extend({
-    broker: z.string().describe("Kode broker berdasarkan data dari /list/broker (Cth : BCA)").optional(),
+    broker: z.string().describe("Kode broker berdasarkan data dari /list/broker (Cth : ZP)").optional(),
 });
 
 

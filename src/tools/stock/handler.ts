@@ -208,7 +208,7 @@ export const insider = async (
 ): Promise<HandlerReturnType> => {
   const apiKey = context.session?.apiKey as string;
   
-  const data = await customFetch(`analysis/shareholder-insider?code${args.code}&from=${args.from}&to=${args.to}&page=${args.page}&limit=${args.limit}`, apiKey);
+  const data = await customFetch(`analysis/shareholder-insider?code${args.code}&from=${args.from}&page=${args.page}&limit=${args.limit}`, apiKey);
 
   return formatResponse(data);
 }
@@ -219,7 +219,7 @@ export const aboveFivePercent = async (
 ): Promise<HandlerReturnType> => {
   const apiKey = context.session?.apiKey as string;
   
-  const data = await customFetch(`analysis/shareholder-above?code=${args.code}&from=${args.from}&to=${args.to}&page=${args.page}&limit=${args.limit}`, apiKey);
+  const data = await customFetch(`analysis/shareholder-above?code=${args.code}&from=${args.from}&page=${args.page}&limit=${args.limit}`, apiKey);
 
   return formatResponse(data);
 }
