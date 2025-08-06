@@ -14,43 +14,13 @@ export const server = new FastMCP({
   version: "1.0.0",
   authenticate: async (request): Promise<SessionData> => {
     const apiKey = request.headers["invezgo-api-key"] as string;
-    const bypass = request.headers["invezgo-bypass"] as string;
     if (!apiKey) {
       throw new Response(null, {
         status: 401,
         statusText: "Authentication required",
       });
     }
-
-    if (bypass === process.env.JWT_SECRET) {
-      return { apiKey };
-    }
-    
-    try {
-      const decoded: any = jwt.verify(apiKey, process.env.JWT_SECRET as string);
-      
-      if (decoded.device !== 'API') {
-        throw new Response(null, {
-            status: 402,
-            statusText: "Invalid API",
-        });
-      }
-
-      if (decoded.role === 'USER' || decoded.role === 'STARTER' || decoded.role === 'TRIAL' || decoded.role === 'PRO') {
-        throw new Response(null, {
-            status: 402,
-            statusText: "Advance role user only",
-        });
-      }
-
-      return { apiKey };
-    } catch (error) {
-      console.log(error);
-      throw new Response(null, {
-        status: 401,
-        statusText: "Authentication required",
-      });
-    }
+    return { apiKey };
   },
   health: {
     enabled: true,
