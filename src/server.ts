@@ -1,6 +1,7 @@
 import { FastMCP } from "fastmcp";
 import * as jwt from 'jsonwebtoken';
 import { registerStockTools } from "./tools/stock";
+import 'dotenv/config';
 
 export interface SessionData {
   apiKey: string;
@@ -20,7 +21,7 @@ export const server = new FastMCP({
     }
     
     try {
-      const decoded: any = jwt.verify(apiKey, "Invezgo;2929");
+      const decoded: any = jwt.verify(apiKey, process.env.JWT_SECRET as string);
       
       // if (decoded.device !== 'API') {
       //   throw new Response(null, {
