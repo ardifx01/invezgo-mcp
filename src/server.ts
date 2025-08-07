@@ -1,7 +1,9 @@
 import { FastMCP } from "fastmcp";
 import * as jwt from 'jsonwebtoken';
 import { registerStockTools } from "./tools/stock";
-import dotenv from 'dotenv'; 
+import dotenv from 'dotenv';
+import { registerPersonalTools } from "./tools/personal";
+
 dotenv.config();
 
 export interface SessionData {
@@ -31,6 +33,7 @@ export const server = new FastMCP({
 });
 
 registerStockTools();
+registerPersonalTools();
 
 server.start({
   transportType: "httpStream",
