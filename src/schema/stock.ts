@@ -68,6 +68,10 @@ export const aboveFivePercentSchema = insiderSchema.extend({
     broker: z.string().describe("Kode broker berdasarkan data dari /list/broker (Cth : ZP)").optional(),
 });
 
+export const priceSeasonalSchema = codeOnlySchema.extend({
+    range: z.number().default(12).describe("Range berdasarkan jumlah bulan (Cth : 12)")
+});
+
 
 export type CodeOnlyArgs = z.infer<typeof codeOnlySchema>;
 
@@ -91,6 +95,7 @@ export type InsiderArgs = z.infer<typeof insiderSchema>;
 
 export type AboveFivePercentArgs = z.infer<typeof aboveFivePercentSchema>;
 
+export type PriceSeasonalArgs = z.infer<typeof priceSeasonalSchema>;
 
 
 

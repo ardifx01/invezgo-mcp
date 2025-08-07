@@ -9,7 +9,8 @@ import {
     intradayInventorySchema,
     sankeySchema,
     insiderSchema,
-    aboveFivePercentSchema
+    aboveFivePercentSchema,
+    priceSeasonalSchema
 } from "@/schema/stock";
 import { server } from "@/server";
 import { 
@@ -31,7 +32,10 @@ import {
     intradayInventory,
     sankey,
     insider,
-    aboveFivePercent
+    aboveFivePercent,
+    priceDiary,
+    priceSeasonal,
+    searchStock
 } from "./handler";
   
 export const registerStockTools = (): void => {
@@ -171,5 +175,26 @@ export const registerStockTools = (): void => {
         description: "Data pemegang saham atau insider sesuai dengan kode emiten (code) dan tanggal awal (from) dan akhir (to). Jenis data: Cross Section. Update EOD setiap 18.00 WIB",
         parameters: aboveFivePercentSchema,
         execute: async (args, context) => await aboveFivePercent(args, context),
+    });
+
+    server.addTool({
+        name: "priceDiary",
+        description: "Tabel perubahan harga saham harian dengan kode emiten (code). Jenis data: Time Series. Update Realtime",
+        parameters: codeOnlySchema,
+        execute: async (args, context) => await priceDiary(args, context),
+    });
+
+    server.addTool({
+        name: "priceSeasonal",
+        description: "Tabel perubahan harga saham bulanan dengan kode emiten (code). Jenis data: Time Series. Update Realtime",
+        parameters: priceSeasonalSchema,
+        execute: async (args, context) => await priceSeasonal(args, context),
+    });
+
+    server.addTool({
+        name: "searchStock",
+        description: "Cari perusahaan berdasarkan kata kunci (query). Mendukung pencarian dengan kata kunci (query). Query dapat berupa nama perusahaan, kode emiten, industri, atau kategori.",
+        parameters: codeOnlySchema,
+        execute: async (args, context) => await searchStock(args, context),
     });
 };

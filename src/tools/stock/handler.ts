@@ -9,7 +9,8 @@ import {
   IntradayInventoryArgs,
   SankeyArgs,
   InsiderArgs,
-  AboveFivePercentArgs
+  AboveFivePercentArgs,
+  PriceSeasonalArgs
 } from "@/schema/stock";
 import { SessionData } from "@/server";
 import { HandlerReturnType } from "@/types/common";
@@ -220,6 +221,39 @@ export const aboveFivePercent = async (
   const apiKey = context.session?.apiKey as string;
   
   const data = await customFetch(`analysis/shareholder-above?code=${args.code}&from=${args.from}&page=${args.page}&limit=${args.limit}`, apiKey);
+
+  return formatResponse(data);
+}
+
+export const priceDiary = async (
+  args: CodeOnlyArgs,
+  context: Context<SessionData>
+): Promise<HandlerReturnType> => {
+  const apiKey = context.session?.apiKey as string;
+
+  const data = await customFetch(`analysis/price-diary/${args.code}`, apiKey);
+
+  return formatResponse(data);
+}
+
+export const priceSeasonal = async (
+  args: PriceSeasonalArgs,
+  context: Context<SessionData>
+): Promise<HandlerReturnType> => {
+  const apiKey = context.session?.apiKey as string;
+
+  const data = await customFetch(`analysis/price-seasonality/${args.code}?range=${args.range}`, apiKey);
+
+  return formatResponse(data);
+}
+
+export const searchStock = async (
+  args: CodeOnlyArgs,
+  context: Context<SessionData>
+): Promise<HandlerReturnType> => {
+  const apiKey = context.session?.apiKey as string;
+  
+  const data = await customFetch(`search/stock?query=${args.code}&cursor=1`, apiKey);
 
   return formatResponse(data);
 }
