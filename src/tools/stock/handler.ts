@@ -258,6 +258,17 @@ export const searchStock = async (
   return formatResponse(data);
 }
 
+export const newsStock = async (
+  args: CodeOnlyArgs,
+  context: Context<SessionData>
+): Promise<HandlerReturnType> => {
+  const apiKey = context.session?.apiKey as string;
+
+  const data = await customFetch(`posts/space/category/${args.code}/NEWS?page=1&limit=20`, apiKey);
+
+  return formatResponse(data);
+}
+
 
 
 
