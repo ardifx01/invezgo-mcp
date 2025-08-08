@@ -27,7 +27,7 @@ export const registerPersonalTools = (): void => {
     });
 
     server.addTool({
-        name: "journalSummary",
+        name: "journal-summary",
         description: "Get journal summary",
         parameters: fromToSchema,
         execute: async (args, context) => await journalSummary(args, context),
@@ -40,7 +40,7 @@ export const registerPersonalTools = (): void => {
     });
 
     server.addTool({
-        name: "portfolioSummary",
+        name: "portfolio-summary",
         description: "Get portfolio summary",
         execute: async (args, context) => await portfolioSummary(context),
     });
@@ -53,7 +53,7 @@ export const registerPersonalTools = (): void => {
     });
 
     server.addTool({
-        name: "tradeSummary",
+        name: "trade-summary",
         description: "Get trade summary",
         parameters: fromToSchema,
         execute: async (args, context) => await tradeSummary(args, context),
