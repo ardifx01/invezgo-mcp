@@ -35,7 +35,8 @@ import {
     aboveFivePercent,
     priceDiary,
     priceSeasonal,
-    searchStock
+    searchStock,
+    newsStock
 } from "./handler";
   
 export const registerStockTools = (): void => {
@@ -365,5 +366,20 @@ export const registerStockTools = (): void => {
             title: "Cari Saham Berdasarkan Kata Kunci"
         },
         execute: async (args, context) => await searchStock(args, context),
+    });
+
+    server.addTool({
+        name: "news",
+        description: "Cari berita terkait saham berdasarkan kode emiten (code). Maksimal 20 berita terkait saham berdasarkan kode emiten (code). Dapat digunakan untuk Analisa Sentimen.",
+        parameters: codeOnlySchema,
+        annotations: {
+            destructiveHint: false,
+            openWorldHint: true,
+            readOnlyHint: true,
+            idempotentHint: true,
+            streamingHint: true,
+            title: "Berita Saham"
+        },
+        execute: async (args, context) => await newsStock(args, context),
     });
 };
