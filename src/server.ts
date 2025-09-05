@@ -15,7 +15,7 @@ export const server = new FastMCP({
   name: "Invezgo MCP",
   version: "1.0.0",
   authenticate: async (request): Promise<SessionData> => {
-    const authorization = request.headers["authorization"] as string;
+    const authorization = request.headers.authorization;
     if (!authorization) {
       throw new Response(null, {
         status: 401,
