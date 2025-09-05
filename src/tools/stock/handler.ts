@@ -10,7 +10,8 @@ import {
   SankeyArgs,
   InsiderArgs,
   AboveFivePercentArgs,
-  PriceSeasonalArgs
+  PriceSeasonalArgs,
+  FinancialArgs
 } from "@/schema/stock";
 import { SessionData } from "@/server";
 import { HandlerReturnType } from "@/types/common";
@@ -265,6 +266,17 @@ export const newsStock = async (
   const apiKey = context.session?.apiKey as string;
 
   const data = await customFetch(`posts/space/category/${args.code}/NEWS?page=1&limit=20`, apiKey);
+
+  return formatResponse(data);
+}
+
+export const financialStock = async (
+  args: FinancialArgs,
+  context: Context<SessionData>
+): Promise<HandlerReturnType> => {
+  const apiKey = context.session?.apiKey as string;
+
+  const data = await customFetch(`analysis/financial/${args.code}?statement=${args.statement}&type=${args.type}&limit=${args.limit}`, apiKey);
 
   return formatResponse(data);
 }
