@@ -276,7 +276,7 @@ export const financialStock = async (
 ): Promise<HandlerReturnType> => {
   const apiKey = context.session?.apiKey as string;
 
-  const data = await customFetch(`analysis/financial/${args.code}?statement=${args.statement}&type=${args.type}&limit=${args.limit}`, apiKey);
+  const data = await customFetch(`analysis/financial-statement/${args.code}?statement=${args.statement}&type=${args.type}&limit=${args.limit}`, apiKey);
 
   return formatResponse(data);
 }
