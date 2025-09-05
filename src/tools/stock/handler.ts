@@ -276,34 +276,7 @@ export const financialStock = async (
 ): Promise<HandlerReturnType> => {
   const apiKey = context.session?.apiKey as string;
 
-  const normalizeStatement = (s: FinancialArgs["statement"]) => {
-    const map: Record<string, "BS" | "IS" | "CF"> = {
-      balance_sheet: "BS",
-      income_statement: "IS",
-      cash_flow: "CF",
-    };
-    return map[s] ?? "BS";
-  };
-
-  const normalizeType = (t: FinancialArgs["type"]) => {
-    const map: Record<string, "Q" | "FY" | "Q1" | "Q2" | "Q3" | "Q4"> = {
-      Quarterly: "Q",
-      Annual: "FY",
-      "Quarter 1": "Q1",
-      "Quarter 2": "Q2",
-      "Quarter 3": "Q3",
-      "Quarter 4": "Q4",
-    };
-    return map[t] ?? "Q";
-  };
-
-  const normalized = {
-    ...args,
-    statement: normalizeStatement(args.statement),
-    type: normalizeType(args.type),
-  };
-
-  const data = await customFetch(`analysis/financial/${args.code}?statement=${normalized.statement}&type=${normalized.type}&limit=${normalized.limit}`, apiKey);
+  const data = await customFetch(`analysis/financial/${args.code}?statement=${args.statement}&type=${args.type}&limit=${args.limit}`, apiKey);
 
   return formatResponse(data);
 }

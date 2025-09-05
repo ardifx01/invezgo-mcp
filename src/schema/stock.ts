@@ -73,10 +73,10 @@ export const priceSeasonalSchema = codeOnlySchema.extend({
 });
 
 export const financialSchema = codeOnlySchema.extend({
-    statement: z.enum(["balance_sheet", "income_statement", "cash_flow"]).default("balance_sheet")
-        .describe("Jenis laporan keuangan berdasarkan jenis statement. Bisa tulis: balance_sheet → BS, income_statement → IS, cash_flow → CF"),
-    type: z.enum(["Quarterly", "Annual", "Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]).default("Quarterly")
-        .describe("Jenis laporan keuangan berdasarkan tanggal periode. Bisa tulis: Quarterly → Q, Annual → FY, Quarter 1 → Q1, Quarter 2 → Q2, Quarter 3 → Q3, Quarter 4 → Q4"),
+    statement: z.enum(["BS", "IS", "CF", "EQ"]).default("BS")
+        .describe("Jenis laporan keuangan berdasarkan jenis statement. Bisa tulis: BS → balance_sheet, IS → income_statement, CF → cash_flow, EQ → equity"),
+    type: z.enum(["Q", "FY", "Q1", "Q2", "Q3", "Q4"]).default("Q")
+        .describe("Jenis laporan keuangan berdasarkan tanggal periode. Bisa tulis: Q → Quarterly, FY → Annual, Q1 → Quarter 1, Q2 → Quarter 2, Q3 → Quarter 3, Q4 → Quarter 4"),
     limit: z.number().int().min(1).max(100).default(5).describe("Jumlah data yang akan di tampilkan per laporan keuangan")
 });
 
