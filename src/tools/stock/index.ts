@@ -10,7 +10,8 @@ import {
     sankeySchema,
     insiderSchema,
     aboveFivePercentSchema,
-    priceSeasonalSchema
+    priceSeasonalSchema,
+    financialSchema
 } from "@/schema/stock";
 import { server } from "@/server";
 import { 
@@ -36,7 +37,8 @@ import {
     priceDiary,
     priceSeasonal,
     searchStock,
-    newsStock
+    newsStock,
+    financialStock
 } from "./handler";
   
 export const registerStockTools = (): void => {
@@ -381,5 +383,20 @@ export const registerStockTools = (): void => {
             title: "Berita Saham"
         },
         execute: async (args, context) => await newsStock(args, context),
+    });
+
+    server.addTool({
+        name: "financial",
+        description: "Data laporan keuangan saham sesuai dengan kode emiten (code) dan jenis statement (statement) dan jenis tanggal periode (type) dan jumlah data (limit). Jenis data: Panel. Update tergantung laporan dari emiten",
+        parameters: financialSchema,
+        annotations: {
+            destructiveHint: false,
+            openWorldHint: true,
+            readOnlyHint: true,
+            idempotentHint: true,
+            streamingHint: true,
+            title: "Laporan Keuangan Saham"
+        },
+        execute: async (args, context) => await financialStock(args, context),
     });
 };
