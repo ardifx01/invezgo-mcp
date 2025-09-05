@@ -15,16 +15,15 @@ export const server = new FastMCP({
   name: "Invezgo MCP",
   version: "1.0.0",
   authenticate: async (request): Promise<SessionData> => {
-    const apiKey = request.headers["invezgo-api-key"] as string;
     const authorization = request.headers["authorization"] as string;
-    if (!apiKey || !authorization) {
+    if (!authorization) {
       throw new Response(null, {
         status: 401,
         statusText: "Authentication required",
       });
     }
-    const key = apiKey || authorization.split(" ")[1];
-    return { apiKey: key };
+    const apiKey = authorization.split(" ")[1];
+    return { apiKey };
   },
   health: {
     enabled: true,
