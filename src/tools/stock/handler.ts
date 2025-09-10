@@ -11,7 +11,8 @@ import {
   InsiderArgs,
   AboveFivePercentArgs,
   PriceSeasonalArgs,
-  FinancialArgs
+  FinancialArgs,
+  KeystatArgs
 } from "@/schema/stock";
 import { SessionData } from "@/server";
 import { HandlerReturnType } from "@/types/common";
@@ -281,7 +282,16 @@ export const financialStock = async (
   return formatResponse(data);
 }
 
+export const keystatStock = async (
+  args: KeystatArgs,
+  context: Context<SessionData>
+): Promise<HandlerReturnType> => {
+  const apiKey = context.session?.apiKey as string;
 
+  const data = await customFetch(`analysis/keystat/${args.code}?type=${args.type}&limit=${args.limit}`, apiKey);
+
+  return formatResponse(data);
+}
 
 
 

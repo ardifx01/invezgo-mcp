@@ -80,6 +80,12 @@ export const financialSchema = codeOnlySchema.extend({
     limit: z.number().int().min(1).max(100).default(15).describe("Jumlah data yang akan di tampilkan per laporan keuangan")
 });
 
+export const keystatSchema = codeOnlySchema.extend({
+    type: z.enum(["Q", "FY", "Q1", "Q2", "Q3", "Q4"]).default("Q")
+        .describe("Jenis laporan keuangan berdasarkan tanggal periode. Bisa tulis: Q → Quarterly, FY → Annual, Q1 → Quarter 1, Q2 → Quarter 2, Q3 → Quarter 3, Q4 → Quarter 4"),
+    limit: z.number().int().min(1).max(100).default(15).describe("Jumlah data yang akan di tampilkan per laporan keuangan")
+});
+
 
 export type CodeOnlyArgs = z.infer<typeof codeOnlySchema>;
 
@@ -106,6 +112,8 @@ export type AboveFivePercentArgs = z.infer<typeof aboveFivePercentSchema>;
 export type PriceSeasonalArgs = z.infer<typeof priceSeasonalSchema>;
 
 export type FinancialArgs = z.infer<typeof financialSchema>;
+
+export type KeystatArgs = z.infer<typeof keystatSchema>;
 
 
 
