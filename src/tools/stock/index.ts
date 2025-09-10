@@ -11,7 +11,8 @@ import {
     insiderSchema,
     aboveFivePercentSchema,
     priceSeasonalSchema,
-    financialSchema
+    financialSchema,
+    keystatSchema
 } from "@/schema/stock";
 import { server } from "@/server";
 import { 
@@ -38,7 +39,8 @@ import {
     priceSeasonal,
     searchStock,
     newsStock,
-    financialStock
+    financialStock,
+    keystatStock
 } from "./handler";
   
 export const registerStockTools = (): void => {
@@ -398,5 +400,20 @@ export const registerStockTools = (): void => {
             title: "Laporan Keuangan Saham"
         },
         execute: async (args, context) => await financialStock(args, context),
+    });
+
+    server.addTool({
+        name: "keystat",
+        description: "Data laporan keuangan saham sesuai dengan kode emiten (code) dan jenis tanggal periode (type) dan jumlah data (limit). Jenis data: Panel. Update tergantung laporan dari emiten",
+        parameters: keystatSchema,
+        annotations: {
+            destructiveHint: false,
+            openWorldHint: true,
+            readOnlyHint: true,
+            idempotentHint: true,
+            streamingHint: true,
+            title: "Laporan Keuangan Saham"
+        },
+        execute: async (args, context) => await keystatStock(args, context),
     });
 };
