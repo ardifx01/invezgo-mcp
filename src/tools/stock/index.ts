@@ -53,7 +53,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Informasi perusahaan",
         },
         execute: async (args, context) => await information(args, context),
@@ -67,7 +66,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Daftar perusahaan tercatat di Bursa Efek Indonesia"
         },
         execute: async (args, context) => await listStock(context),
@@ -81,7 +79,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Daftar broker atau sekuritas tercatat di Bursa Efek Indonesia"
         },
         execute: async (args, context) => await listBroker(context),
@@ -96,7 +93,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Daftar teratas harian berdasarkan perubahan harga"
         },
         execute: async (args, context) => await topChange(args, context),
@@ -111,7 +107,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Daftar teratas harian berdasarkan transaksi asing"
         },
         execute: async (args, context) => await topForeign(args, context),
@@ -126,7 +121,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Daftar teratas harian berdasarkan akumulasi dan distribusi"
         },
         execute: async (args, context) => await topAccumulation(args, context),
@@ -141,7 +135,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Chart Saham"
         },
         execute: async (args, context) => await chart(args, context),
@@ -156,7 +149,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Jumlah Pemegang Saham"
         },
         execute: async (args, context) => await shareholderNumber(args, context),
@@ -171,7 +163,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Komposisi Pemegang Saham"
         },
         execute: async (args, context) => await shareholder(args, context),
@@ -186,7 +177,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Komposisi Pemegang Saham Berdasarkan KSEI"
         },
         execute: async (args, context) => await shareholderKSEI(args, context),
@@ -201,7 +191,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Broker Summary Saham"
         },
         execute: async (args, context) => await summaryStock(args, context),
@@ -216,7 +205,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Broker Summary Broker"
         },
         execute: async (args, context) => await summaryBroker(args, context),
@@ -231,7 +219,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Visualisasi Transaksi Saham"
         },
         execute: async (args, context) => await inventoryStock(args, context),
@@ -246,7 +233,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Visualisasi Transaksi Broker"
         },
         execute: async (args, context) => await inventoryBroker(args, context),
@@ -261,7 +247,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Visualisasi Momentum Jual dan Beli Saham"
         },
         execute: async (args, context) => await momentum(args, context),
@@ -276,7 +261,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Visualisasi Transaksi Saham Harian"
         },
         execute: async (args, context) => await intradayInventory(args, context),
@@ -291,7 +275,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Visualisasi Transaksi Perpindahan Saham"
         },
         execute: async (args, context) => await sankey(args, context),
@@ -306,7 +289,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Transaksi Orang Dalam"
         },
         execute: async (args, context) => await insider(args, context),
@@ -321,7 +303,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Kepemilikan Diatas 5% dari Total Saham"
         },
         execute: async (args, context) => await aboveFivePercent(args, context),
@@ -336,7 +317,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Perubahan Harga Saham Harian Dalam 1 Bulan Tertentu"
         },
         execute: async (args, context) => await priceDiary(args, context),
@@ -351,7 +331,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Perubahan Harga Saham Bulanan Dalam Beberapa Tahun"
         },
         execute: async (args, context) => await priceSeasonal(args, context),
@@ -366,7 +345,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Cari Saham Berdasarkan Kata Kunci"
         },
         execute: async (args, context) => await searchStock(args, context),
@@ -381,7 +359,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Berita Saham"
         },
         execute: async (args, context) => await newsStock(args, context),
@@ -396,7 +373,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Laporan Keuangan Saham"
         },
         execute: async (args, context) => await financialStock(args, context),
@@ -411,7 +387,6 @@ export const registerStockTools = (): void => {
             openWorldHint: true,
             readOnlyHint: true,
             idempotentHint: true,
-            streamingHint: true,
             title: "Laporan Keuangan Saham"
         },
         execute: async (args, context) => await keystatStock(args, context),

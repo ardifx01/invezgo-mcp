@@ -156,7 +156,11 @@ export const inventoryStock = async (
 ): Promise<HandlerReturnType> => {
   const apiKey = context.session?.apiKey as string;
 
-  const data = await customFetch(`analysis/inventory-chart/stock/${args.code}?from=${args.from}&to=${args.to}&investor=${args.investor}&market=${args.market}&scope=${args.scope}&limit=${args.limit}&filter=${args.filter}`, apiKey);
+  // Properly encode array parameters
+  const filterParam = args.filter ? args.filter.join(',') : '';
+  const filterQuery = filterParam ? `&filter=${encodeURIComponent(filterParam)}` : '';
+
+  const data = await customFetch(`analysis/inventory-chart/stock/${args.code}?from=${args.from}&to=${args.to}&investor=${args.investor}&market=${args.market}&scope=${args.scope}&limit=${args.limit}${filterQuery}`, apiKey);
 
   return formatResponse(data);
 }
@@ -167,7 +171,11 @@ export const inventoryBroker = async (
 ): Promise<HandlerReturnType> => {
   const apiKey = context.session?.apiKey as string;
 
-  const data = await customFetch(`analysis/inventory-chart/broker/${args.code}?from=${args.from}&to=${args.to}&investor=${args.investor}&market=${args.market}&scope=${args.scope}&limit=${args.limit}&filter=${args.filter}`, apiKey);
+  // Properly encode array parameters
+  const filterParam = args.filter ? args.filter.join(',') : '';
+  const filterQuery = filterParam ? `&filter=${encodeURIComponent(filterParam)}` : '';
+
+  const data = await customFetch(`analysis/inventory-chart/broker/${args.code}?from=${args.from}&to=${args.to}&investor=${args.investor}&market=${args.market}&scope=${args.scope}&limit=${args.limit}${filterQuery}`, apiKey);
 
   return formatResponse(data);
 }
@@ -189,7 +197,11 @@ export const intradayInventory = async (
 ): Promise<HandlerReturnType> => {
   const apiKey = context.session?.apiKey as string;
   
-  const data = await customFetch(`analysis/intraday-inventory-chart/${args.code}?range=${args.range}&type=${args.type}&total=${args.total}&buyer=${args.buyer}&seller=${args.seller}&market=${args.market}&broker=${args.broker}`, apiKey);
+  // Properly encode array parameters
+  const brokerParam = args.broker ? args.broker.join(',') : '';
+  const brokerQuery = brokerParam ? `&broker=${encodeURIComponent(brokerParam)}` : '';
+  
+  const data = await customFetch(`analysis/intraday-inventory-chart/${args.code}?range=${args.range}&type=${args.type}&total=${args.total}&buyer=${args.buyer}&seller=${args.seller}&market=${args.market}${brokerQuery}`, apiKey);
 
   return formatResponse(data);
 }
@@ -200,7 +212,11 @@ export const sankey = async (
 ): Promise<HandlerReturnType> => {
   const apiKey = context.session?.apiKey as string;
   
-  const data = await customFetch(`analysis/sankey-chart/${args.code}?type=${args.type}&buyer=${args.buyer}&seller=${args.seller}&market=${args.market}&broker=${args.broker}`, apiKey);
+  // Properly encode array parameters
+  const brokerParam = args.broker ? args.broker.join(',') : '';
+  const brokerQuery = brokerParam ? `&broker=${encodeURIComponent(brokerParam)}` : '';
+  
+  const data = await customFetch(`analysis/sankey-chart/${args.code}?type=${args.type}&buyer=${args.buyer}&seller=${args.seller}&market=${args.market}${brokerQuery}`, apiKey);
 
   return formatResponse(data);
 }
