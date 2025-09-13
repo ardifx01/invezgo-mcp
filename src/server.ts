@@ -3,6 +3,7 @@ import * as jwt from 'jsonwebtoken';
 import { registerStockTools } from "./tools/stock";
 import dotenv from 'dotenv';
 import { registerPersonalTools } from "./tools/personal";
+import { registerSearchTools } from "./tools/search";
 import { URL } from 'url';
 
 dotenv.config();
@@ -71,6 +72,7 @@ export const server = new FastMCP({
 
 registerStockTools();
 registerPersonalTools();
+registerSearchTools();
 
 server.start({
   transportType: "httpStream",
