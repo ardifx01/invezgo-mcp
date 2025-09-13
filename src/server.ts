@@ -3,6 +3,7 @@ import * as jwt from 'jsonwebtoken';
 import { registerStockTools } from "./tools/stock";
 import dotenv from 'dotenv';
 import { registerPersonalTools } from "./tools/personal";
+import { URL } from 'url';
 
 dotenv.config();
 
@@ -17,11 +18,23 @@ export const server = new FastMCP({
   authenticate: async (request): Promise<SessionData> => {
     const deprecated = request.headers["invezgo-api-key"] as string;
     const authorization = request.headers.authorization;
+    
+    // Parse query parameters from URL
+    let queryApiKey: string | undefined;
+    if (request.url) {
+      try {
+        const url = new URL(request.url, `http://${request.headers.host || 'localhost'}`);
+        queryApiKey = url.searchParams.get('api') || undefined;
+      } catch (error) {
+        // If URL parsing fails, continue without query parameter
+        queryApiKey = undefined;
+      }
+    }
 
-    if (!authorization && !deprecated) {
+    if (!authorization && !deprecated && !queryApiKey) {
       throw new Response(null, {
         status: 401,
-        statusText: "Authentication required. Please provide either 'Authorization' header or 'invezgo-api-key' header.",
+        statusText: "Authentication required. Please provide either 'Authorization' header, 'invezgo-api-key' header, or 'api' query parameter.",
       });
     }
 
@@ -37,6 +50,8 @@ export const server = new FastMCP({
         });
       }
       apiKey = token;
+    } else if (queryApiKey) {
+      apiKey = queryApiKey;
     } else {
       throw new Response(null, {
         status: 401,
